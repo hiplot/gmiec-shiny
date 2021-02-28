@@ -36,21 +36,21 @@ ui <- dashboardPage(
       tabItem(tabName = "run_gmiec",
             
                 fluidRow(
-                  box(title="GMIEC - Input dataset",status="primary",solidHeader=TRUE,collapsible =TRUE,
+                  shinydashboard::box(title="GMIEC - Input dataset (github.com/guidmt/GMIEC-shiny/tree/master/datasets)",status="primary",solidHeader=TRUE,collapsible =TRUE,
                     fileInput("ge_dataset", "Upload gene-expression data",buttonLabel=icon("folder-open")),
                     fileInput("cnv_dataset", "Upload copy-number variation data",buttonLabel=icon("folder-open")),
                     fileInput("meth_dataset", "Upload methylation data",buttonLabel=icon("folder-open")),
                     fileInput("mut_dataset", "Upload mutation data",buttonLabel=icon("folder-open")),
                     fileInput("clinical_dataset", "Upload clinical data",buttonLabel=icon("folder-open"))
                          ),#end box
-                  box(title="GMIEC - Input annotation",status="warning",solidHeader=TRUE,collapsible =TRUE,
+                  shinydashboard::box(title="GMIEC - Input annotation",status="warning",solidHeader=TRUE,collapsible =TRUE,
                       fileInput("annotation_dataset", "Upload annotation data",buttonLabel=icon("folder")),
                       numericInput("distance","distance (bp)",value=20000)
                       ),
-                  box(title="GMIEC - Input drugs",status="info",solidHeader=TRUE,collapsible =TRUE,
+                  shinydashboard::box(title="GMIEC - Input drugs",status="info",solidHeader=TRUE,collapsible =TRUE,
                       fileInput("drugs_dataset", "Upload drugs-genes data",buttonLabel=icon("folder-open"))
                   ),
-                  box(title="GMIEC - Type of Analysis",status="danger",solidHeader=TRUE,collapsible =TRUE,
+                  shinydashboard::box(title="GMIEC - Type of Analysis",status="danger",solidHeader=TRUE,collapsible =TRUE,
                       fileInput("bed_file", "Upload the bed file - for 1,2",buttonLabel=icon("folder")),
                       checkboxInput("genes_annotated","1) Use only the genes annotated",FALSE),
                       checkboxInput("all_genes","2) Use all genes",FALSE),
@@ -59,7 +59,7 @@ ui <- dashboardPage(
                       
                   ),
                   
-                  box(title="GMIEC - Parameters Analysis",status="success",solidHeader=TRUE,collapsible =TRUE,
+                  shinydashboard::box(title="GMIEC - Parameters Analysis",status="success",solidHeader=TRUE,collapsible =TRUE,
                       numericInput("clusters","Number Clusters k-mode/k-means",value=10),
                       checkboxInput("GMIEC_RULES","Analysis with logic rules + k-mode",FALSE),
                       checkboxInput("RF_ANALYSIS","Analysis with random forest + k-means",TRUE),
@@ -67,7 +67,7 @@ ui <- dashboardPage(
                   
                   h3("Analysis with minimum two datasets"),    
                   
-                  box(checkboxInput("two_datasets","Analysis a minimum of two datasets (Select)",FALSE),
+                  shinydashboard::box(checkboxInput("two_datasets","Analysis a minimum of two datasets (Select)",FALSE),
                       checkboxInput("cb_ge", label = "gene-expression", value = FALSE),
                       checkboxInput("cb_cnv", label = "copy-number", value = FALSE),
                       checkboxInput("cb_meth", label = "methylation", value = FALSE),
@@ -106,7 +106,7 @@ ui <- dashboardPage(
               tabsetPanel(
               tabPanel("Summary heatmaps GMIEC", 
               fluidRow(
-              box(title="Upload results GMIEC",status="success",width=3,solidHeader=TRUE,collapsible =FALSE,  
+              shinydashboard::box(title="Upload results GMIEC",status="success",width=3,solidHeader=TRUE,collapsible =FALSE,  
               fileInput("vis_gmiec2", "Upload results GMIEC",buttonLabel=icon("folder")),
               actionButton('run_vis', 'Create report!',style = "color: white; 
                      background-color: #0066CC; 
@@ -119,30 +119,30 @@ ui <- dashboardPage(
                                border-radius: 6px;
                                border-width: 2px")
               ),
-              box(title="Heatmap scores drugs",status="warning",solidHeader=TRUE,collapsible =FALSE,
+              shinydashboard::box(title="Heatmap scores drugs",status="warning",solidHeader=TRUE,collapsible =FALSE,
                   plotlyOutput("plot_heatmap_scores_drugs")),
-              box(title="Heatmap scores genes",status="warning",solidHeader=TRUE,collapsible =FALSE,
+              shinydashboard::box(title="Heatmap scores genes",status="warning",solidHeader=TRUE,collapsible =FALSE,
                   plotlyOutput("plot_heatmap_scores_genes")),
-              box(title="Heatmap scores combined",status="warning",solidHeader=TRUE,collapsible =FALSE,
+              shinydashboard::box(title="Heatmap scores combined",status="warning",solidHeader=TRUE,collapsible =FALSE,
                   plotlyOutput("plot_heatmap_scores_sad"))
               )#end fluid row
               ), # end tab panel
       tabPanel("Table summary scores, genes, drugs for patient",
                fluidRow(
-               box(title="Select a patient from the list",status="success",width=3,solidHeader=TRUE,collapsible =TRUE,
+               shinydashboard::box(title="Select a patient from the list",status="success",width=3,solidHeader=TRUE,collapsible =TRUE,
                uiOutput('list_patients')),
-               box(title="Select a module of the selected patient",status="success",width=3,solidHeader=TRUE,collapsible =TRUE,
+               shinydashboard::box(title="Select a module of the selected patient",status="success",width=3,solidHeader=TRUE,collapsible =TRUE,
                uiOutput('number_modules')),
-               box(title="Table summary scores for patients",status="warning",solidHeader=TRUE,collapsible =FALSE,
+               shinydashboard::box(title="Table summary scores for patients",status="warning",solidHeader=TRUE,collapsible =FALSE,
                htmlOutput("table_summary_scores")),
-               box(title="Table summary genes module patient",status="warning",solidHeader=TRUE,collapsible =FALSE,
+               shinydashboard::box(title="Table summary genes module patient",status="warning",solidHeader=TRUE,collapsible =FALSE,
                htmlOutput("table_summary_genes_module")),
-               box(title="Table summary drug module patient",status="warning",solidHeader=TRUE,collapsible =FALSE,
+               shinydashboard::box(title="Table summary drug module patient",status="warning",solidHeader=TRUE,collapsible =FALSE,
                htmlOutput("table_summary_drugs_module"))
                )),
       tabPanel("Plot heatmap from Results (GMIEC-RES)",
                
-               box(title="GMIEC - Input dataset",status="primary",solidHeader=TRUE,collapsible =TRUE,
+               shinydashboard::box(title="GMIEC - Input dataset",status="primary",solidHeader=TRUE,collapsible =TRUE,
                    fileInput("results_gmiec_from_parse", "Upload results GMIEC",buttonLabel=icon("folder-open")),
                    fileInput("ge_dataset_res", "Upload gene-expression data",buttonLabel=icon("folder-open")),
                    fileInput("cnv_dataset_res", "Upload copy-number variation data",buttonLabel=icon("folder-open")),
@@ -166,11 +166,11 @@ ui <- dashboardPage(
                                border-width: 2px")
                ),
                
-               box(title="Select patient",status="warning",solidHeader=TRUE,collapsible =FALSE,
+               shinydashboard::box(title="Select patient",status="warning",solidHeader=TRUE,collapsible =FALSE,
                    uiOutput('list_patients2')),
-               box(title="Heatmap module patient",status="warning",solidHeader=TRUE,collapsible =FALSE,
+               shinydashboard::box(title="Heatmap module patient",status="warning",solidHeader=TRUE,collapsible =FALSE,
                    plotOutput("plot_module_patient")),
-               box(title="Drugs in current module",status="warning",solidHeader=TRUE,collapsible =FALSE,
+               shinydashboard::box(title="Drugs in current module",status="warning",solidHeader=TRUE,collapsible =FALSE,
                    htmlOutput("table_summary_drugs_module2"))
                
       )
@@ -180,7 +180,7 @@ ui <- dashboardPage(
               tabsetPanel(
                 tabPanel("Parse GMIEC results", 
                          fluidRow(
-                           box(title="Upload results GMIEC",status="success",width=3,solidHeader=TRUE,collapsible =FALSE,  
+                           shinydashboard::box(title="Upload results GMIEC",status="success",width=3,solidHeader=TRUE,collapsible =FALSE,  
                                fileInput("vis_gmiec3", "Upload results GMIEC",buttonLabel=icon("folder")),
                                selectInput("type_input_gmiec",
                                            "Select which algorithm was used to create the GMIEC-output",
